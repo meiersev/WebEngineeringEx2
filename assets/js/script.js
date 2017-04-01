@@ -31,7 +31,9 @@ function addClassToElements (elements, _class) {
         e.addClass(_class);
     })
 }
-
+// JQuery on Wordpress runs in no-conflict mode, thus we need this extra wrapper
+(function($){
+    
 $(document).ready(function() {
     var homeTitle = $('#home_id').find('h1');
     var welcomeElement = $('#welcome_id');
@@ -152,12 +154,16 @@ $(document).ready(function() {
 	$("#dessert_btn").click(function () {display_menu(3);});
 });
 
+// End of extra wrapper
+})(jQuery)
+
+
 /* Menu functions*/
 
 function adapt_menu_to_viewport(){
 	if (window.matchMedia('(min-width: 1025px)').matches) {
-		var section_frame = $("section#menu_id");
-		var h = Math.max($(window).innerHeight() - section_frame.outerHeight(),160);
+		var section_frame = jQuery("section#menu_id");
+		var h = Math.max(jQuery(window).innerHeight() - section_frame.outerHeight(),160);
 		var y = h - section_frame[0].getBoundingClientRect().top;
 		var i = Math.floor(2.25*y/h)+1;
 		if(i < 0) {display_menu(0);} 
@@ -169,28 +175,28 @@ function adapt_menu_to_viewport(){
 // Allowed arguments: 0, 1, 2 ,3
 function display_menu(n){
 	// Hide all pictures
-	$("div#appetizers_id").css("display", "none");
-	$("div#fresh_pasta_id").css("display", "none");
-	$("div#meat_fish_id").css("display", "none");
-	$("div#dessert_id").css("display", "none");
+	jQuery("div#appetizers_id").css("display", "none");
+	jQuery("div#fresh_pasta_id").css("display", "none");
+	jQuery("div#meat_fish_id").css("display", "none");
+	jQuery("div#dessert_id").css("display", "none");
 	
 	// Hide all Titles
-	$("h2#appetizers_id").css("display", "none");
-	$("h2#fresh_pasta_id").css("display", "none");
-	$("h2#meat_fish_id").css("display", "none");
-	$("h2#dessert_id").css("display", "none");
+	jQuery("h2#appetizers_id").css("display", "none");
+	jQuery("h2#fresh_pasta_id").css("display", "none");
+	jQuery("h2#meat_fish_id").css("display", "none");
+	jQuery("h2#dessert_id").css("display", "none");
 	
 	// Hide all Descriptions
-	$("p#appetizers_id").css("display", "none");
-	$("p#fresh_pasta_id").css("display", "none");
-	$("p#meat_fish_id").css("display", "none");
-	$("p#dessert_id").css("display", "none");
+	jQuery("p#appetizers_id").css("display", "none");
+	jQuery("p#fresh_pasta_id").css("display", "none");
+	jQuery("p#meat_fish_id").css("display", "none");
+	jQuery("p#dessert_id").css("display", "none");
 	
 	// Unselect all Buttons
-	$("#appetizers_btn").removeClass("selected");
-	$("#fresh_pasta_btn").removeClass("selected");
-	$("#meat_fish_btn").removeClass("selected");
-	$("#dessert_btn").removeClass("selected");
+	jQuery("#appetizers_btn").removeClass("selected");
+	jQuery("#fresh_pasta_btn").removeClass("selected");
+	jQuery("#meat_fish_btn").removeClass("selected");
+	jQuery("#dessert_btn").removeClass("selected");
 	
 	// select visible subsection
 	var menuSectionId = 
@@ -199,9 +205,9 @@ function display_menu(n){
 		: (n == 3) ? "#dessert"
 		: "#appetizers";
 	// Show selected subsection
-	$("div" + menuSectionId + "_id").css("display", "flex");	
-	$("p" + menuSectionId + "_id").css("display", "block");
-	$("h2" + menuSectionId + "_id").css("display", "block");
-	$(menuSectionId + "_btn").addClass("selected");
+	jQuery("div" + menuSectionId + "_id").css("display", "flex");	
+	jQuery("p" + menuSectionId + "_id").css("display", "block");
+	jQuery("h2" + menuSectionId + "_id").css("display", "block");
+	jQuery(menuSectionId + "_btn").addClass("selected");
 }
 

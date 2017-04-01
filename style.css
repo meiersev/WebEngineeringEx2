@@ -177,7 +177,7 @@ nav li a {
 }
 
 #kitchen_id {
-	background: url(../../images/small1.jpg) -220px -610px;
+	background: url(assets/images/small1.jpg) -220px -610px;
 	color: rgba(255, 255, 255, 1.0);
 	/*	
 	 *	On the description:
@@ -493,7 +493,7 @@ header .lp-button, #events_id .lp-button {
 }
 
  #home_id {
-    background-image: url("../../images/header.jpg");
+    background-image: url("assets/images/header.jpg");
     background-position: center;
     background-repeat:no-repeat;
     height:400px;
@@ -617,19 +617,19 @@ header .lp-button, #events_id .lp-button {
 }
 
 #events_id .cooking-event span{
-    background-image: url(../../images/cooking.jpg);
+    background-image: url(assets/images/cooking.jpg);
 }
 
 #events_id .pasta-event span{
-    background-image: url(../../images/2.jpg)
+    background-image: url(assets/images/2.jpg)
 }
 
 #events_id .happy-event span{
-    background-image: url(../../images/3.png)
+    background-image: url(assets/images/3.png)
 }
 
 #events_id .birthday-event span{
-    background-image: url(../../images/4.jpg)
+    background-image: url(assets/images/4.jpg)
 }
 
 input, textarea {
@@ -699,7 +699,7 @@ textarea.lp-input {
 }
 
 #booking_id {
-	background-image: url('../../images/book-table.jpg');
+	background-image: url('assets/images/book-table.jpg');
 	background-size: cover;
 }
 
