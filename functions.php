@@ -17,6 +17,25 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 	return;
 }
 
+/* A custom template tag I created for our sections*/
+function the_section_id() {
+	$css_id = get_post_meta( get_the_ID(), 'css_id', true );
+	if (! $css_id) {
+		// Maybe we are lucky and the name corresponds to the id
+		$css_id = strtolower(the_title(NULL, NULL, false)) . '_id';
+		$css_id = str_replace(" ", "_", $css_id);
+	}
+	echo $css_id;
+}
+/* Another custom template tag I created for our sections, 
+ * currently only used to add the parallex tag 
+ */
+function the_section_class() {
+	$css_id = get_post_meta( get_the_ID(), 'css_class', true );
+	echo $css_id;
+}
+
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -533,3 +552,4 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+

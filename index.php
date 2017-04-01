@@ -30,31 +30,27 @@ get_template_part( 'nav' );
 <!-- First About-->
 
 <a class="anchor" id="about"></a>
-<section id="welcome_id" >
-    <h2>Welcome</h2>
-    <p>LaPlace Restaurant was founded in May of 2015. The cuisine we serve is created with the utmost attention to details. Our emphasis is on providing fresh, locally sourced, exquisite food. As such our menus change on a regular basis, allowing us to offer you mouth watering, perfectly prepared dishes.<br />
-</section>
 
-
-
-<!-- Second About -->
-
-
-<section id="kitchen_id" class="parallax">
-    <h2  >High Quality Cuisine</h2>
-    <p >Our cuisine is a melting pot of different cultures which have come together to form a unique blend of flavours and techniques.<br />
-</section>
-
-
-<!-- Third About -->
-
-
-<section id="ingredients_id">
-    <h2>Only the Best Ingredients</h2>
-    <p>It's vital to our operation to make sure everybody is aware of the quality of the ingredients we use. As the choices we make in terms of which supplies we buy for our recipes is intrinsic to factors such as the healthiness of the food we make to the price you pay for it. That's why on our menus you find the origins of each of our ingredients.<br />
-</section>
-
-
+<?php
+	// Display the first 3 pages
+	$args = array(
+	  'post_type' => 'page',
+	  'meta_key'   => 'position',
+	  'orderby' => 'meta_value_num',
+	  'order' => 'ASC',
+	  'meta_query' => array(
+			array(
+				'key'     => 'position',
+				'value'   => array( 0, 1, 2 ),
+				'compare' => 'IN',
+			),
+		),
+	);
+	$page_query = new WP_Query( $args );
+	while ( $page_query->have_posts() ) : $page_query->the_post();
+		get_template_part( 'page_content' );
+	endwhile;
+?>
 
 <!-- Start Menu -->
 
@@ -612,11 +608,26 @@ get_template_part( 'nav' );
 <!-- Third -->
 
 <a class="anchor" id="events"></a>
-<section id="about_events_id" >
-    <h2>Our Events</h2>
-    <p>In our Philosophy, a restaurant is not only a place where to eat but also to communicate and know new people. For these reasons we organize various events every month.<br />
-    </p>
-</section>
+<?php
+	// Display the 4th page
+	$args = array(
+	  'post_type' => 'page',
+	  'meta_key'   => 'position',
+	  'orderby' => 'meta_value_num',
+	  'order' => 'ASC',
+	  'meta_query' => array(
+			array(
+				'key'     => 'position',
+				'value'   => array( 3 ),
+				'compare' => 'IN',
+			),
+		),
+	);
+	$page_query = new WP_Query( $args );
+	while ( $page_query->have_posts() ) : $page_query->the_post();
+		get_template_part( 'page_content' );
+	endwhile;
+?>
 
 <div id="WTF_id">
     <section id="events_id" class="lp-brown">
