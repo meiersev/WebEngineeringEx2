@@ -800,17 +800,17 @@ get_template_part( 'nav' );
 <section id="footer_id" class="footer-table">
     <div  class="footer-col" >
         <h2> Opening Hour </h2>
-        <p> <b> MONDAY : </b>Closed </p> <br>
-        <p> <b>TUE-FRI : </b>8am - 12am</p> <br>
-        <p> <b>SAT-SUN : </b>7am - 1am</p> <br>
-        <p> <b>HOLYDAYS : </b>12pm-12am</p> <br>
+        <p> <b> MONDAY : </b><?php echo get_theme_mod('monday_hours', '')?> </p> <br>
+        <p> <b>TUE-FRI : </b><?php echo get_theme_mod('tue_fri_hours', '')?></p> <br>
+        <p> <b>SAT-SUN : </b><?php echo get_theme_mod('sat_sun_hours', '')?></p> <br>
+        <p> <b>HOLYDAYS : </b><?php echo get_theme_mod('holidays', '')?></p> <br>
     </div>
     <div  class="footer-col">
         <h2>  Contacts </h2>
-        <p> <b>ADDRESS : </b>4578 Zurich</p> <br>
-        <p> Badenerstrasse 500</p> <br>
-        <p> <b>PHONE : </b>(606) 144-0100 </p> <br>
-        <p> <b>EMAIL : </b>admin@laplace.com</p> <br>
+        <p> <b>ADDRESS : </b><?php echo get_theme_mod('address')?></p> <br>
+        <p> <?php echo get_theme_mod('street')?></p> <br>
+        <p> <b>PHONE : </b><?php echo get_theme_mod('phone_nr')?></p> <br>
+        <p> <b>EMAIL : </b><?php echo get_theme_mod('email_addr')?></p> <br>
     </div>
 </section>
 
