@@ -26,6 +26,24 @@ function fancyrestaurant_customize_register( $wp_customize ) {
 		'render_callback' => 'fancyrestaurant_customize_partial_blogdescription',
 	) );
 
+    /*
+     * Costum Title
+     */
+    $wp_customize->add_setting('website_title', array(
+        'default' => 'LapLace'
+    ) );
+
+    $wp_customize->add_section('ex2', array(
+        'title' => __('Visible_section_name', 'fancyrestaurant'),
+        'priority' => 30,
+    ));
+
+    $wp_customize->add_control ( new WP_Customize_Control($wp_customize, 'website_title', array(
+        'description' => 'name',
+        'section'     => 'eix2',
+        'settings'    => 'website_title',
+    )));
+
 	/**
 	 * Custom colors.
 	 */

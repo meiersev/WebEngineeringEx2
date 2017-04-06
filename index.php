@@ -24,7 +24,7 @@ get_template_part( 'nav' );
 
 <a class="anchor" id="home"></a>
 <header id="home_id" >
-    <h1  > LaPlace - Zurich </h1>
+    <h1> <?php echo get_theme_mod('header_title', 'LaPlace - Zurich');?> </h1>
     <a href="#book" class="lp-button hover-dark-gray" >Book a Table</a>
 </header>
 <!-- First About-->
