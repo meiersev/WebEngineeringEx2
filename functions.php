@@ -35,208 +35,103 @@ function the_section_class() {
 	echo $css_id;
 }
 
-/* Register customizer object for the opening hours and contacts
- */
-function hours_contacts_customize_register($wp_customize) {
-	$wp_customize->add_section('hours_section', array(
-		'title' => __('Opening Hours'),
-		'description' => __('Add the opening hours here'),
-		'capabilities' => 'edit_theme_options'
-	));
+require_once('customizer_settings.php');
 
-	$wp_customize->add_setting('monday_hours', array(
-    'default'    => 'closed',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-  ));
+/* Custom post type event
+*/
+if(!function_exists('create_event_post_type')):
+	function create_event_post_type() {
+		$labels = array(
+			'name'=>__('Events'),
+		);
+		$args=array(
+			'labels' => $labels,
+			'public' => true,
+			'publicly_queryable' => true,
+			'show_in_nav_menus' => true,
+			'query_var' => true,
+			'rewrite' => true,
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array(
+				'thumbnail',
 
-	$wp_customize->add_control('monday_hours_text', array(
-    'settings' => 'monday_hours',
-    'label'    => __( 'Monday hours' ),
-    'section'  => 'hours_section',
-    'type'     => 'text',
-	));
-
-	$wp_customize->add_setting('tue_fri_hours', array(
-    'default'    => 'closed',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_control('tue_fri_hours_text', array(
-    'settings' => 'tue_fri_hours',
-    'label'    => __( 'Tuesday-Friday hours' ),
-    'section'  => 'hours_section',
-    'type'     => 'text',
-	));
-
-	$wp_customize->add_setting('sat_sun_hours', array(
-    'default'    => 'closed',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_control('sat_sun_hours_text', array(
-		'settings' => 'sat_sun_hours',
-		'label'    => __( 'Saturday-Sunday hours' ),
-		'section'  => 'hours_section',
-		'type'     => 'text',
-	));
-
-	$wp_customize->add_setting('holidays', array(
-    'default'    => 'closed',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_control('holidays_text', array(
-    'settings' => 'holidays',
-    'label'    => __( 'Holidays' ),
-    'section'  => 'hours_section',
-    'type'     => 'text',
-	));
-
-	$wp_customize->add_section('contacts_section', array(
-		'title' => __('Contacts'),
-		'description' => __('Put your contact information here'),
-		'capabilities' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_setting('address', array(
-    'default'    => 'Musterstadt',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-  ));
-
-	$wp_customize->add_control('address_text', array(
-    'settings' => 'address',
-    'label'    => __( 'Address' ),
-    'section'  => 'contacts_section',
-    'type'     => 'text',
-	));
-
-	$wp_customize->add_setting('street', array(
-    'default'    => 'Musterstrasse 123',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_control('street_text', array(
-    'settings' => 'street',
-    'label'    => __( 'Street' ),
-    'section'  => 'contacts_section',
-    'type'     => 'text',
-	));
-
-	$wp_customize->add_setting('phone_nr', array(
-    'default'    => '012 345 67 89',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_control('phone_nr_text', array(
-		'settings' => 'phone_nr',
-		'label'    => __( 'Phone Number' ),
-		'section'  => 'contacts_section',
-		'type'     => 'text',
-	));
-
-	$wp_customize->add_setting('email_addr', array(
-    'default'    => 'your@mail.here',
-    'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
-	));
-
-	$wp_customize->add_control('email_addr_text', array(
-    'settings' => 'email_addr',
-    'label'    => __( 'E-Mail Address' ),
-    'section'  => 'contacts_section',
-    'type'     => 'text',
-	));
-
+			),
+			'menu_position' => 5,
+			'register_meta_box_cb' => 'add_event_post_type_metabox'
+		);
+		register_post_type('event',$args);
+		register_taxonomy('custom_category','event',
+		array(
+			'hierarchical'=>true,
+			'label'=>'role'
+		)
+	);
 }
-add_action('customize_register', 'hours_contacts_customize_register');
 
-function website_title_customize_register($wp_customize){
-    $wp_customize->add_section('header_section', array(
-        'title'       => __('Header'),
-        'description' => __('You can change the header  here'),
-    ));
-
-    $wp_customize->add_setting('header_title', array(
-        'default'   => 'LaPlace - Zurich',
-        'transport' => 'postMessage',
-    ));
-
-    $wp_customize->add_setting('header_picture', array(
-        'default' => get_template_directory_uri().'/assets/images/header.jpg',
-    ));
-
-    $wp_customize->add_setting('background-color',array(
-        'default' => '#443333',
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Color_Control(
-        $wp_customize,
-        'background-color',
-        array(
-            'label'     => __('background-color', fancyrestaurant),
-            'section'   => 'header_section',
-            'setting'   => 'background_color',
-        )
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Image_Control(
-        $wp_customize, 'header_picture', array(
-            'label'     =>  __('Upload your header picture','mytheme'),
-            'section'   => 'header_section',
-            'settings'  => 'header_picture',
-        )     
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        'header_title',
-        array(
-            'label' => __('What is your title name', 'fancyrestaurant'),
-            'section' => 'header_section',
-            'settings'=> 'header_title',
-        )
-    ));
+function add_event_post_type_metabox(){
+	add_meta_box('event_metabox','Event Data','event_metabox','event','normal');
 }
-add_action('customize_register','website_title_customize_register');
 
-function fancyrestaurant_color_css(){
-?>
-    <style type="text/css">
-        .lp-brown{
-            background-color: <?php echo get_theme_mod('background-color')?>;
-    }
-    </style>
+function event_metabox(){
+	global $post;
+	$custom = get_post_custom($post->ID);
+	$ename = $custom['event_ename'][0];
+	$office = $custom['event_start'][0];
+	$email = $custom['event_end'][0];
+  $description = $custom['event_description'][0];
+	?>
+	<div class="person">
+		<p><label>Event Title<br><input type="text" name="ename" size="50"
+			value="<?php echo $ename;?>"></label>
+		</p>
+		<p><label>Start date<br><input type="datetime-local" name="start-date" size="50"
+			value="<?php echo $office;?>"></label>
+		</p>
+		<p> <label>End date<br><input type="datetime-local" name="end-date" size="50"
+			value="<?php echo $email;?>"></label>
+		</p>
+		<p> <label>Description<br><textarea rows="8" cols="60" name="description"
+			><?php echo $description?></textarea></label>
+		</p>
+	</div>
 <?php
 }
-add_action('wp_head', 'fancyrestaurant_color_css');
 
-function fancyrestaurant_custom_css(){
-?>
-    <style type="text/css">
-        #home_id{
-            background-image: url(<?php echo get_theme_mod('header_picture');?>);}
-    </style>
-<?php
-}
-add_action('wp_head', 'fancyrestaurant_custom_css');
+function event_post_save_meta($post_id, $post){
+	// is the user allowed to edit the post or page?
+	if(!current_user_can('edit_post', $post->ID )){
+		return $post->ID;
+	}
+	$event_post_meta['event_ename'] = $_POST['ename'];
+	$event_post_meta['event_start'] = $_POST['start-date'];
+	$event_post_meta['event_end'] = $_POST['end-date'];
+	$event_post_meta['event_description'] = $_POST['description'];
+	// add values as custom fields
+	foreach($event_post_meta as $key => $value){
+		if(get_post_meta($post->ID, $key, false)){
+			// if the custom field already has a value
+			update_post_meta($post->ID, $key, $value);
+		}else{
+			// if the custom field doesn't have a value
+			add_post_meta($post->ID, $key, $value);
+		}
+		if(!$value){
+			// delete if blank
+			delete_post_meta($post->ID, $key);
+		}
+	}
+	$my_post = array(
+		'ID'         => $post_id,
+		'post_title' => get_post_meta( $post_id, 'event_ename', true )
+	);
 
-function fancyrestaurant_costumizer_life_preview(){
-    wp_enqueue_script(
-        'fancyrestaurant_customizer',
-        get_template_directory_uri().'/assets/js/fancy_customizer.js',
-        array('jquery', 'customize_preview'),
-        '',
-        true
-    );
+	wp_update_post( $my_post );
 }
-add_action('customize_preview_init', 'fancyrestaurant_costumizer_life_preview');
+add_action('save_post','event_post_save_meta',1,2);
+
+add_action('init','create_event_post_type');
+endif;
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
