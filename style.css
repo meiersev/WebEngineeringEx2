@@ -3,7 +3,7 @@ body {
 	min-width: 320px;
 	vertical-align: middle;
 	margin: 0 auto;
-	background-color:black ;
+	background-color:black ;  
 	font-family: 'Roboto', sans-serif;
 	font-size: 100%;
     overflow-x: hidden;
@@ -85,6 +85,7 @@ nav {
 
 nav ul {
 	max-width: 960px;
+    height: 100%;
 	margin: auto;
 	display: flex;
 	flex-direction: row;
@@ -178,7 +179,7 @@ nav li a {
 #kitchen_id {
 	background: url(assets/images/small1.jpg) -220px -610px;
 	color: rgba(255, 255, 255, 1.0);
-	/*
+	/*	
 	 *	On the description:
 	 *	text-shadow: 2px 2px 2px #000000;
 	 *	But that look horrible on my screen
@@ -201,7 +202,7 @@ nav li a {
  *	Menu section
  */
 
-/* Menu styles*/
+/* Menu styles*/ 
 #menu_id{
 	padding: 1em 5em 1em 5em;
 	color: rgba(220,220,210,1.0);
@@ -214,7 +215,7 @@ section#menu_id{min-height: 675px;}
 }
 #menu_id h2 {
 	font-size: small;
-}
+} 
 #menu_id p {
 	text-align: justify;
 }
@@ -229,7 +230,7 @@ section#menu_id{min-height: 675px;}
 }
 #menu_id .menu-row {
 	display: block;
-}
+} 
 #menu_description_id {
 	width: 30%;
 	vertical-align: top;
@@ -430,7 +431,7 @@ section#menu_id{min-height: 675px;}
     border-radius: 0;
 }
 
-/* Menu visibility */
+/* Menu visibility */ 
 	/* Selection */
 #fresh_pasta_id  {display: none;}
 #meat_fish_id  {display: none;}
