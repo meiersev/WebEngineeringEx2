@@ -61,12 +61,6 @@ if(!function_exists('create_event_post_type')):
 			'register_meta_box_cb' => 'add_event_post_type_metabox'
 		);
 		register_post_type('event', $args);
-		// register_taxonomy('custom_category','event',
-		// 	array(
-		// 		'hierarchical'=>true,
-		// 		'label'=>'role'
-		// 	)
-		// );
 	}
 	add_action('init','create_event_post_type');
 
@@ -130,8 +124,37 @@ if(!function_exists('create_event_post_type')):
 			'post_title' => get_post_meta( $post_id, 'event_ename', true )
 		));
 		add_action('save_post','event_post_save_meta',1,2);
-	}
+  }
 	add_action('save_post','event_post_save_meta',1,2);
+
+  // Add start and end as columns to list of events
+	function event_custom_columns($columns) {
+		$columns['event_start'] = 'Start Date';
+		$columns['event_end'] = 'End Date';
+		return $columns;
+	}
+	add_filter('manage_edit-event_columns', 'event_custom_columns');
+	add_filter('manage_edit-event_sortable_columns', 'event_custom_columns');
+
+	function event_column( $colname, $cptid ) {
+		if ( $colname == 'event_start')
+		  echo get_post_meta( $cptid, 'event_start', true );
+		elseif ($colname == 'event_end') {
+			echo get_post_meta($cptid, 'event_end', true);
+		}
+	}
+	add_action('manage_event_posts_custom_column', 'event_column', 10, 2);
+	function sort_date( $vars ) {
+		if( array_key_exists('orderby', $vars )) {
+			if('Start Date' == $vars['orderby']) {
+				$vars['orderby'] = 'event_start';
+			} elseif ('End Date' == $vars['orderby']) {
+				$vars['orderby'] = 'event_end';
+			}
+		}
+		return $vars;
+	}
+	add_filter('request', 'sort_date');
 endif;
 
 /**
