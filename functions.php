@@ -148,8 +148,10 @@ if(!function_exists('create_event_post_type')):
 		if( array_key_exists('orderby', $vars )) {
 			if('Start Date' == $vars['orderby']) {
 				$vars['orderby'] = 'event_start';
+				$vars['meta_key'] = 'event_start';
 			} elseif ('End Date' == $vars['orderby']) {
 				$vars['orderby'] = 'event_end';
+				$vars['meta_key'] = 'event_end';
 			}
 		}
 		return $vars;
