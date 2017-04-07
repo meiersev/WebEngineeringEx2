@@ -42,7 +42,8 @@ require_once('customizer_settings.php');
 if(!function_exists('create_event_post_type')):
 	function create_event_post_type() {
 		$labels = array(
-			'name'=>__('Events'),
+			'name'          => __('Events'),
+			'singular_name' => __('Event')
 		);
 		$args=array(
 			'labels' => $labels,
@@ -54,83 +55,83 @@ if(!function_exists('create_event_post_type')):
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			'supports' => array(
-				'thumbnail',
-
+				'thumbnail'
 			),
 			'menu_position' => 5,
 			'register_meta_box_cb' => 'add_event_post_type_metabox'
 		);
-		register_post_type('event',$args);
-		register_taxonomy('custom_category','event',
-		array(
-			'hierarchical'=>true,
-			'label'=>'role'
-		)
-	);
-}
-
-function add_event_post_type_metabox(){
-	add_meta_box('event_metabox','Event Data','event_metabox','event','normal');
-}
-
-function event_metabox(){
-	global $post;
-	$custom = get_post_custom($post->ID);
-	$ename = $custom['event_ename'][0];
-	$office = $custom['event_start'][0];
-	$email = $custom['event_end'][0];
-  $description = $custom['event_description'][0];
-	?>
-	<div class="person">
-		<p><label>Event Title<br><input type="text" name="ename" size="50"
-			value="<?php echo $ename;?>"></label>
-		</p>
-		<p><label>Start date<br><input type="datetime-local" name="start-date" size="50"
-			value="<?php echo $office;?>"></label>
-		</p>
-		<p> <label>End date<br><input type="datetime-local" name="end-date" size="50"
-			value="<?php echo $email;?>"></label>
-		</p>
-		<p> <label>Description<br><textarea rows="8" cols="60" name="description"
-			><?php echo $description?></textarea></label>
-		</p>
-	</div>
-<?php
-}
-
-function event_post_save_meta($post_id, $post){
-	// is the user allowed to edit the post or page?
-	if(!current_user_can('edit_post', $post->ID )){
-		return $post->ID;
+		register_post_type('event', $args);
+		// register_taxonomy('custom_category','event',
+		// 	array(
+		// 		'hierarchical'=>true,
+		// 		'label'=>'role'
+		// 	)
+		// );
 	}
-	$event_post_meta['event_ename'] = $_POST['ename'];
-	$event_post_meta['event_start'] = $_POST['start-date'];
-	$event_post_meta['event_end'] = $_POST['end-date'];
-	$event_post_meta['event_description'] = $_POST['description'];
-	// add values as custom fields
-	foreach($event_post_meta as $key => $value){
-		if(get_post_meta($post->ID, $key, false)){
-			// if the custom field already has a value
-			update_post_meta($post->ID, $key, $value);
-		}else{
-			// if the custom field doesn't have a value
-			add_post_meta($post->ID, $key, $value);
-		}
-		if(!$value){
-			// delete if blank
-			delete_post_meta($post->ID, $key);
-		}
+	add_action('init','create_event_post_type');
+
+	function add_event_post_type_metabox(){
+		add_meta_box('event_metabox','Event Data','event_metabox','event','normal');
 	}
-	$my_post = array(
-		'ID'         => $post_id,
-		'post_title' => get_post_meta( $post_id, 'event_ename', true )
-	);
 
-	wp_update_post( $my_post );
-}
-add_action('save_post','event_post_save_meta',1,2);
+	function event_metabox(){
+		global $post;
+		$custom = get_post_custom($post->ID);
+		$ename = $custom['event_ename'][0];
+		$office = $custom['event_start'][0];
+		$email = $custom['event_end'][0];
+	  $description = $custom['event_description'][0];
+		?>
+		<div class="person">
+			<p><label>Event Title<br><input type="text" name="ename" size="50"
+				value="<?php echo $ename;?>"></label>
+			</p>
+			<p><label>Start date<br><input type="datetime-local" name="start-date" size="50"
+				value="<?php echo $office;?>"></label>
+			</p>
+			<p> <label>End date<br><input type="datetime-local" name="end-date" size="50"
+				value="<?php echo $email;?>"></label>
+			</p>
+			<p> <label>Description<br><textarea rows="8" cols="60" name="description"
+				><?php echo $description?></textarea></label>
+			</p>
+		</div>
+	<?php
+	}
 
-add_action('init','create_event_post_type');
+	function event_post_save_meta($post_id, $post){
+		// is the user allowed to edit the post or page?
+		if(!current_user_can('edit_post', $post->ID )){
+			return $post->ID;
+		}
+		$event_post_meta['event_ename'] = $_POST['ename'];
+		$event_post_meta['event_start'] = $_POST['start-date'];
+		$event_post_meta['event_end'] = $_POST['end-date'];
+		$event_post_meta['event_description'] = $_POST['description'];
+		// add values as custom fields
+		foreach($event_post_meta as $key => $value){
+			if(get_post_meta($post->ID, $key, false)){
+				// if the custom field already has a value
+				update_post_meta($post->ID, $key, $value);
+			}else{
+				// if the custom field doesn't have a value
+				add_post_meta($post->ID, $key, $value);
+			}
+			if(!$value){
+				// delete if blank
+				delete_post_meta($post->ID, $key);
+			}
+		}
+		// Remove the save_post action for the call to wp_update_post, to avoid
+		// looping on it.
+		remove_action('save_post', 'event_post_save_meta', 1, 2);
+		wp_update_post(array(
+			'ID'         => $post_id,
+			'post_title' => get_post_meta( $post_id, 'event_ename', true )
+		));
+		add_action('save_post','event_post_save_meta',1,2);
+	}
+	add_action('save_post','event_post_save_meta',1,2);
 endif;
 
 /**
