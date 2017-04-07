@@ -800,17 +800,17 @@ get_template_part( 'nav' );
 <section id="footer_id" class="footer-table">
     <div  class="footer-col" >
         <h2> Opening Hour </h2>
-        <p> <b> MONDAY : </b><?php echo get_theme_mod('monday_hours', '')?> </p> <br>
-        <p> <b>TUE-FRI : </b><?php echo get_theme_mod('tue_fri_hours', '')?></p> <br>
-        <p> <b>SAT-SUN : </b><?php echo get_theme_mod('sat_sun_hours', '')?></p> <br>
-        <p> <b>HOLYDAYS : </b><?php echo get_theme_mod('holidays', '')?></p> <br>
+        <p> <b> MONDAY : </b><?php echo get_theme_mod('monday_hours', 'closed')?> </p> <br>
+        <p> <b>TUE-FRI : </b><?php echo get_theme_mod('tue_fri_hours', 'closed')?></p> <br>
+        <p> <b>SAT-SUN : </b><?php echo get_theme_mod('sat_sun_hours', 'closed')?></p> <br>
+        <p> <b>HOLYDAYS : </b><?php echo get_theme_mod('holidays', 'always')?></p> <br>
     </div>
     <div  class="footer-col">
         <h2>  Contacts </h2>
-        <p> <b>ADDRESS : </b><?php echo get_theme_mod('address')?></p> <br>
-        <p> <?php echo get_theme_mod('street')?></p> <br>
-        <p> <b>PHONE : </b><?php echo get_theme_mod('phone_nr')?></p> <br>
-        <p> <b>EMAIL : </b><?php echo get_theme_mod('email_addr')?></p> <br>
+        <p> <b>ADDRESS : </b><?php echo get_theme_mod('address', 'Musterstadt')?></p> <br>
+        <p> <?php echo get_theme_mod('street', 'Musterstrasse 1')?></p> <br>
+        <p> <b>PHONE : </b><?php echo get_theme_mod('phone_nr', '123 456 78 90')?></p> <br>
+        <p> <b>EMAIL : </b><?php echo get_theme_mod('email_addr', 'your@mail.here')?></p> <br>
     </div>
 </section>
 
