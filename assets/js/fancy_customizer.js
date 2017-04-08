@@ -4,6 +4,16 @@
             $('#home_id h1').text(newval);
         });
     });
+    wp.customize('background-color', function (value){
+        value.bind( function(newval) {
+        jQuery('.lp-brown').css('background-color', newval);
+        });
+    });
+    wp.customize('header_picture', function (value){
+        value.bind( function(newval){
+            jQuery('#home_id').css('background-image', 'url(' + newval + ')');
+        });
+    });
     wp.customize('monday_hours', function (value) {
       value.bind( function(newval) {
         jQuery('#monday_hours_id').text(newval);

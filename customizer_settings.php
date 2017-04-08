@@ -138,15 +138,17 @@ function website_title_customize_register($wp_customize){
 
     $wp_customize->add_setting('header_title', array(
         'default'   => 'LaPlace - Zurich',
-        'transport' => 'postMessage'
+        'transport' => 'postMessage',
     ));
 
     $wp_customize->add_setting('header_picture', array(
         'default' => get_template_directory_uri().'/assets/images/header.jpg',
+        'transport' => 'postMessage',
     ));
 
     $wp_customize->add_setting('background-color',array(
         'default' => '#443333',
+        'transport' => 'postMessage',
     ));
 
     $wp_customize->add_control(new WP_Customize_Color_Control(
@@ -200,7 +202,8 @@ function fancyrestaurant_custom_css(){
 }
 add_action('wp_head', 'fancyrestaurant_custom_css');
 
-function fancyrestaurant_customizer_live_preview() {
+
+function fancyrestaurant_customizer_title_preview() {
     wp_enqueue_script(
         'fancyrestaurant_customizer',
         get_template_directory_uri().'/assets/js/fancy_customizer.js',
@@ -209,6 +212,6 @@ function fancyrestaurant_customizer_live_preview() {
         true
     );
 }
-add_action('customize_preview_init', 'fancyrestaurant_customizer_live_preview');
+add_action('customize_preview_init', 'fancyrestaurant_customizer_title_preview');
 
 ?>
