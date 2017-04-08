@@ -673,65 +673,41 @@ get_template_part( 'nav' );
             </div>
         </div>
         <br> <br>
-        <h3> <b> Past Events </b> </h3>
-        <div id="past_event_id" class="event-container">
-            <div  class="container-element birthday-event">
-
-                <span ><span  ></span></span>
-
-                <a href="">
-                    <h3>10th Anniversary</h3>
-                    <h2>01/12/2016 18:00 - 23:00</h2>
+        <?php
+          $queryArgs = array(
+            'post_type'      => 'event',
+            'posts_per_page' => 4,
+            'orderby'        => 'meta_value',
+            'meta_key'       => 'event_end',
+            'meta_value'     => date('Y-m-dTH:i'),
+            'meta_compare'   => '<'
+          );
+          $eventPosts = new WP_Query($queryArgs);
+          if ($eventPosts->have_posts()): ?>
+            <h3> <b> Past Events </b> </h3>
+            <div id="past_event_id" class="event-container">
+            <?php while($eventPosts->have_posts()):
+              $eventPosts->the_post();
+              $postID = get_the_ID();
+              $endDate = strtotime(get_post_meta($postID, 'event_end', true));
+              $thumbnailUrl = wp_get_attachment_url(get_post_thumbnail_id($postID));
+              ?>
+              <div  class="container-element">
+                <span >
+                  <span style="background-image: <?php echo 'url('.$thumbnailUrl.')'?>"></span>
+                </span>
+                <a>
+                  <h3><?php echo get_post_meta($postID, 'event_ename', true)?></h3>
+                  <h2><?php echo date("d/m/Y H:i", $endDate); ?></h2>
                 </a>
-
-
-
-            </div>
-            <div  class="container-element pasta-event">
-
-                <span ><span  ></span></span>
-
-                <a href="">
-                    <h3>Pasta Day</h3>
-                    <h2>20/11/2016 18:00 - 23:00</h2>
-                </a>
-
-
-
-            </div>
-
-            <div class="container-element happy-event" >
-
-                <span ><span  ></span></span>
-
-                <a href="">
-                    <h3>Happy Hour</h3>
-                    <h2>11/11/2016 18:00 - 23:00</h2>
-                </a>
-
-
-
-            </div>
-
-            <div class="container-element cooking-event" >
-
-                <span ><span  ></span></span>
-
-                <a href="">
-                    <h3>Salsa</h3>
-                    <h2>01/11/2016 18:00 - 23:00</h2>
-                </a>
-
-
-
-            </div>
-        </div>
+              </div>
+            <?php endwhile; ?>
+          </div>
+          <?php endif; ?>
         <br> <br>
         <div >
             <div >
-
-                <a href="#second" class="lp-button hover-dark-gray" >See More</a>
-
+                <a class="lp-button hover-dark-gray" >See More</a>
             </div>
         </div>
     </section>
