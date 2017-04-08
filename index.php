@@ -634,9 +634,15 @@ get_template_part( 'nav' );
         <h3><b> Upcoming Events </b></h3>
         <div id="upcoming_event_id" class="event-container">
 <?php
-    $args = array('post_type' => 'event', );
+    $args = array('post_type' => 'event',
+            'posts_per_page' => 3,
+            'orderby'        => 'meta_value',
+            'meta_key'       => 'event_end',
+            'meta_value'     => date('Y-m-dTH:i'),
+            'meta_compare'   => '>'
+    );
     $loop = new WP_Query($args);
-    $num  = 0;
+
     while ($loop->have_posts()): 
         $loop->the_post();
 
@@ -648,16 +654,9 @@ get_template_part( 'nav' );
         // Convert the string
         $description = $description_array['0'];
         
-
-        
         // load times and convert them into a readable format
         $start_time = strtotime($start_date['0']);
         $end_time   = strtotime($end_date['0']);
-
-        // skip the event if it has already started
-        if($start_time < time()){
-            continue;
-        }
 
         ?>
             <div class="container-element <?php $num ?>">
@@ -677,12 +676,6 @@ get_template_part( 'nav' );
             </div>
 
         <?php
-
-        //after three events stop loading more events.
-        $num = $num + 1;
-        if ($num > 2){
-            break;
-        }
     endwhile;
 ?>
         </div>
