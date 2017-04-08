@@ -74,7 +74,7 @@ if(!function_exists('create_event_post_type')):
 		$ename = $custom['event_ename'][0];
 		$office = $custom['event_start'][0];
 		$email = $custom['event_end'][0];
-	  $description = $custom['event_description'][0];
+	    $description = $custom['event_description'][0];
 		?>
 		<div class="person">
 			<p><label>Event Title<br><input type="text" name="ename" size="50"

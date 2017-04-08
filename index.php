@@ -633,44 +633,58 @@ get_template_part( 'nav' );
     <section id="events_id" class="lp-brown">
         <h3><b> Upcoming Events </b></h3>
         <div id="upcoming_event_id" class="event-container">
-            <div class="container-element cooking-event">
+<?php
+    $args = array('post_type' => 'event', );
+    $loop = new WP_Query($args);
+    $num  = 0;
+    while ($loop->have_posts()): 
+        $loop->the_post();
 
+        // get the values from our defined meta-tags
+        $start_date = get_post_meta($post->ID, 'event_start');
+        $end_date   = get_post_meta($post->ID, 'event_end');
+        $description_array = get_post_meta($post->ID, 'event_description');
 
-                <span ><span  ></span></span>
+        // Convert the string
+        $description = $description_array['0'];
+        
 
+        
+        // load times and convert them into a readable format
+        $start_time = strtotime($start_date['0']);
+        $end_time   = strtotime($end_date['0']);
 
+        // skip the event if it has already started
+        if($start_time < time()){
+            continue;
+        }
+
+        ?>
+            <div class="container-element <?php $num ?>">
+            <span><span style= "background-image: url(<?php the_post_thumbnail_url() ?>)"></span></span>
                 <a href="">
-                    <h3>Learning to Cook</h3>
-                    <h2>12/03/2017 10:30 a.m.</h2>
+                    <h3><?php the_title() ?></h3>
+                    <h2><?php
+                        if($start_time == $end_time){
+                            echo date('m/d/Y H:i a ', $start_time);
+                        }else{
+                            echo date('m/d/Y H:i - ', $start_time);
+                            echo date('H:i', $end_time);
+                        }
+                    ?></h2>
                 </a>
-
-                <p>Get the basic skills every home cook needs to be successful and happy in the kitchen. Ditch recipes by learning basic cooking formulas. Come and learn how to <a href=""> [Read More]</a></p>
-
+                <p><?php echo $description?><a href="">[READ MORE]</a></p>
             </div>
-            <div class="container-element pasta-event">
 
-                <span ><span  ></span></span>
+        <?php
 
-                <a href="">
-                    <h3>Pasta Day</h3>
-                    <h2>11/03/2017 18:00 - 23:00</h2>
-                </a>
-
-                <p>The fresh pastas offered at LaPlace are made right in our restaurant. And if you've only ever had boxed pastas, you are truly missing out! Once evert two months we celebrate Pasta with an event <a href=""> [Read More]</a></p>
-
-            </div>
-            <div class="container-element happy-event">
-
-                <span ><span  ></span></span>
-
-                <a href="">
-                    <h3>Happy Hour</h3>
-                    <h2>03/03/2017 18:00 - 23:00</h2>
-                </a>
-
-                <p>It's Friday!!! Come and enjoy the start of the weekend with us. Our Happy Hours offer the best combination of nice drinks and food. To reserve a sit please register to the event <a href=""> [Read More]</a> </p>
-
-            </div>
+        //after three events stop loading more events.
+        $num = $num + 1;
+        if ($num > 2){
+            break;
+        }
+    endwhile;
+?>
         </div>
         <br> <br>
         <h3> <b> Past Events </b> </h3>
