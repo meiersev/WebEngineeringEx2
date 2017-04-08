@@ -643,7 +643,7 @@ get_template_part( 'nav' );
     );
     $loop = new WP_Query($args);
 
-    while ($loop->have_posts()): 
+    while ($loop->have_posts()):
         $loop->the_post();
 
         // get the values from our defined meta-tags
@@ -653,7 +653,7 @@ get_template_part( 'nav' );
 
         // Convert the string
         $description = $description_array['0'];
-        
+
         // load times and convert them into a readable format
         $start_time = strtotime($start_date['0']);
         $end_time   = strtotime($end_date['0']);
@@ -680,43 +680,43 @@ get_template_part( 'nav' );
 ?>
         </div>
         <br> <br>
-        <?php
-          $queryArgs = array(
-            'post_type'      => 'event',
-            'posts_per_page' => 4,
-            'orderby'        => 'meta_value',
-            'meta_key'       => 'event_end',
-            'meta_value'     => date('Y-m-dTH:i'),
-            'meta_compare'   => '<'
-          );
-          $eventPosts = new WP_Query($queryArgs);
-          if ($eventPosts->have_posts()): ?>
+        <?php $queryArgs = array(
+          'post_type'      => 'event',
+          'posts_per_page' => 4,
+          'orderby'        => 'meta_value',
+          'meta_key'       => 'event_end',
+          'meta_value'     => date('Y-m-dTH:i'),
+          'meta_compare'   => '<'
+        );
+        $eventPosts = new WP_Query($queryArgs);
+        if ($eventPosts->have_posts()): ?>
             <h3> <b> Past Events </b> </h3>
             <div id="past_event_id" class="event-container">
             <?php while($eventPosts->have_posts()):
-              $eventPosts->the_post();
-              $postID = get_the_ID();
-              $endDate = strtotime(get_post_meta($postID, 'event_end', true));
-              $thumbnailUrl = wp_get_attachment_url(get_post_thumbnail_id($postID));
-              ?>
-              <div  class="container-element">
-                <span >
-                  <span style="background-image: <?php echo 'url('.$thumbnailUrl.')'?>"></span>
-                </span>
-                <a>
-                  <h3><?php echo get_post_meta($postID, 'event_ename', true)?></h3>
-                  <h2><?php echo date("d/m/Y H:i", $endDate); ?></h2>
-                </a>
-              </div>
+            $eventPosts->the_post();
+            $postID = get_the_ID();
+            $startDate = strtotime(get_post_meta($postID, 'event_start', true));
+            $endDate = strtotime(get_post_meta($postID, 'event_end', true));
+            $thumbnailUrl = wp_get_attachment_url(get_post_thumbnail_id($postID));
+            ?>
+                <div class="container-element">
+                    <span >
+                        <span style="background-image: <?php echo 'url('.$thumbnailUrl.')'?>"></span>
+                    </span>
+                    <a>
+                        <h3><?php echo get_post_meta($postID, 'event_ename', true)?></h3>
+                        <h2><?php echo date('d/m/Y H:i', $startDate).' - '.date('H:i', $endDate); ?></h2>
+                    </a>
+                </div>
             <?php endwhile; ?>
-          </div>
-          <?php endif; ?>
-        <br> <br>
-        <div >
-            <div >
-                <a class="lp-button hover-dark-gray" >See More</a>
             </div>
-        </div>
+            <br> <br>
+            <div id="past_event_see_more_wrapper_id">
+                <div>
+                    <a id="past_event_see_more_id" href="" class="lp-button hover-dark-gray" >See More</a>
+                </div>
+            </div>
+        <?php endif; ?>
     </section>
     <!-- Basic Elements -->
 

@@ -36,6 +36,7 @@ function the_section_class() {
 }
 
 require_once('customizer_settings.php');
+require_once('ajax_handling.php');
 
 /* Custom post type event
 */
@@ -74,7 +75,7 @@ if(!function_exists('create_event_post_type')):
 		$ename = $custom['event_ename'][0];
 		$office = $custom['event_start'][0];
 		$email = $custom['event_end'][0];
-	    $description = $custom['event_description'][0];
+	  $description = $custom['event_description'][0];
 		?>
 		<div class="person">
 			<p><label>Event Title<br><input type="text" name="ename" size="50"
@@ -566,6 +567,10 @@ function fancyrestaurant_scripts() {
 
 	wp_enqueue_script( 'fancyrestaurant-main-script', get_theme_file_uri( '/assets/js/script.js' ), array( 'jquery' ), NULL, false );
 
+	wp_enqueue_script('ajax_past_event_script', get_theme_file_uri('/assets/js/ajax_get_past_events.js'), array('jquery'), NULL, true);
+	wp_localize_script('ajax_past_event_script', 'ajaxpagination', array(
+		'ajaxurl' => admin_url('admin-ajax.php')
+	));
 }
 add_action( 'wp_enqueue_scripts', 'fancyrestaurant_scripts' );
 
