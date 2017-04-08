@@ -4,15 +4,16 @@
  */
 function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_section('hours_section', array(
-		'title' => __('Opening Hours'),
-		'description' => __('Add the opening hours here'),
+		'title'        => __('Opening Hours'),
+		'description'  => __('Add the opening hours here'),
 		'capabilities' => 'edit_theme_options'
 	));
 
 	$wp_customize->add_setting('monday_hours', array(
     'default'    => 'closed',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
   ));
 
 	$wp_customize->add_control('monday_hours_text', array(
@@ -25,7 +26,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('tue_fri_hours', array(
     'default'    => 'closed',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
 	));
 
 	$wp_customize->add_control('tue_fri_hours_text', array(
@@ -38,7 +40,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('sat_sun_hours', array(
     'default'    => 'closed',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
 	));
 
 	$wp_customize->add_control('sat_sun_hours_text', array(
@@ -51,7 +54,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('holidays', array(
     'default'    => 'closed',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
 	));
 
 	$wp_customize->add_control('holidays_text', array(
@@ -70,7 +74,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('address', array(
     'default'    => 'Musterstadt',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
   ));
 
 	$wp_customize->add_control('address_text', array(
@@ -83,7 +88,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('street', array(
     'default'    => 'Musterstrasse 123',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
 	));
 
 	$wp_customize->add_control('street_text', array(
@@ -96,7 +102,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('phone_nr', array(
     'default'    => '012 345 67 89',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
 	));
 
 	$wp_customize->add_control('phone_nr_text', array(
@@ -109,7 +116,8 @@ function hours_contacts_customize_register($wp_customize) {
 	$wp_customize->add_setting('email_addr', array(
     'default'    => 'your@mail.here',
     'type'       => 'theme_mod',
-    'capability' => 'edit_theme_options'
+    'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
 	));
 
 	$wp_customize->add_control('email_addr_text', array(
@@ -130,7 +138,7 @@ function website_title_customize_register($wp_customize){
 
     $wp_customize->add_setting('header_title', array(
         'default'   => 'LaPlace - Zurich',
-        'transport' => 'postMessage',
+        'transport' => 'postMessage'
     ));
 
     $wp_customize->add_setting('header_picture', array(
@@ -192,15 +200,15 @@ function fancyrestaurant_custom_css(){
 }
 add_action('wp_head', 'fancyrestaurant_custom_css');
 
-function fancyrestaurant_costumizer_life_preview(){
+function fancyrestaurant_customizer_live_preview() {
     wp_enqueue_script(
         'fancyrestaurant_customizer',
         get_template_directory_uri().'/assets/js/fancy_customizer.js',
-        array('jquery', 'customize_preview'),
+        array('jquery'),
         '',
         true
     );
 }
-add_action('customize_preview_init', 'fancyrestaurant_costumizer_life_preview');
+add_action('customize_preview_init', 'fancyrestaurant_customizer_live_preview');
 
 ?>

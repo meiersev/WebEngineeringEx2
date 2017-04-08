@@ -800,19 +800,42 @@ get_template_part( 'nav' );
 <section id="footer_id" class="footer-table">
     <div  class="footer-col" >
         <h2> Opening Hour </h2>
-        <p> <b> MONDAY : </b><?php echo get_theme_mod('monday_hours', 'closed')?> </p> <br>
-        <p> <b>TUE-FRI : </b><?php echo get_theme_mod('tue_fri_hours', 'closed')?></p> <br>
-        <p> <b>SAT-SUN : </b><?php echo get_theme_mod('sat_sun_hours', 'closed')?></p> <br>
-        <p> <b>HOLYDAYS : </b><?php echo get_theme_mod('holidays', 'always')?></p> <br>
+        <p>
+          <b> MONDAY : </b>
+          <span id="monday_hours_id"><?php echo get_theme_mod('monday_hours', 'closed')?></span>
+        </p> <br>
+        <p>
+          <b>TUE-FRI : </b>
+          <span id="tue_fri_hours_id"><?php echo get_theme_mod('tue_fri_hours', 'closed')?></span>
+        </p> <br>
+        <p>
+          <b>SAT-SUN : </b>
+          <span id="sat_sun_hours_id"><?php echo get_theme_mod('sat_sun_hours', 'closed')?></span>
+        </p> <br>
+        <p>
+          <b>HOLYDAYS : </b>
+          <span id="holidays_id"><?php echo get_theme_mod('holidays', 'always')?></span>
+        </p> <br>
     </div>
     <div  class="footer-col">
         <h2>  Contacts </h2>
-        <p> <b>ADDRESS : </b><?php echo get_theme_mod('address', 'Musterstadt')?></p> <br>
-        <p> <?php echo get_theme_mod('street', 'Musterstrasse 1')?></p> <br>
-        <p> <b>PHONE : </b><?php echo get_theme_mod('phone_nr', '123 456 78 90')?></p> <br>
-        <p> <b>EMAIL : </b><?php echo get_theme_mod('email_addr', 'your@mail.here')?></p> <br>
+        <p>
+          <b>ADDRESS : </b>
+          <span id="address_id"><?php echo get_theme_mod('address', 'Musterstadt')?></span>
+        </p> <br>
+        <p>
+          <span id="street_id"><?php echo get_theme_mod('street', 'Musterstrasse 1')?></span>
+        </p> <br>
+        <p>
+          <b>PHONE : </b>
+          <span id="phone_nr_id"><?php echo get_theme_mod('phone_nr', '123 456 78 90')?></span>
+        </p> <br>
+        <p>
+          <b>EMAIL : </b>
+          <span id="email_addr_id"><?php echo get_theme_mod('email_addr', 'your@mail.here')?></span>
+        </p> <br>
     </div>
 </section>
 
 
-<?php get_footer();
+<?php get_footer(); ?>
