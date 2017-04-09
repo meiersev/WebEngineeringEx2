@@ -637,6 +637,7 @@ get_template_part( 'nav' );
     $args = array('post_type' => 'event',
             'posts_per_page' => 3,
             'orderby'        => 'meta_value',
+            'order'          => 'ASC',
             'meta_key'       => 'event_end',
             'meta_value'     => date('Y-m-dTH:i'),
             'meta_compare'   => '>'
@@ -651,8 +652,9 @@ get_template_part( 'nav' );
         $end_date   = get_post_meta($post->ID, 'event_end');
         $description_array = get_post_meta($post->ID, 'event_description');
 
-        // Convert the string
+        // Convert the string and cut it after 200 words.
         $description = $description_array['0'];
+        $description = substr($description, 0, 200).'...';
 
         // load times and convert them into a readable format
         $start_time = strtotime($start_date['0']);
@@ -665,9 +667,9 @@ get_template_part( 'nav' );
                     <h3><?php the_title() ?></h3>
                     <h2><?php
                         if($start_time == $end_time){
-                            echo date('m/d/Y H:i a ', $start_time);
+                            echo date('d/m/Y H:i a ', $start_time);
                         }else{
-                            echo date('m/d/Y H:i - ', $start_time);
+                            echo date('d/m/Y H:i - ', $start_time);
                             echo date('H:i', $end_time);
                         }
                     ?></h2>
