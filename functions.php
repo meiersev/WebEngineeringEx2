@@ -567,7 +567,14 @@ function fancyrestaurant_scripts() {
 
 	wp_enqueue_script( 'fancyrestaurant-main-script', get_theme_file_uri( '/assets/js/script.js' ), array( 'jquery' ), NULL, false );
 
+    wp_enqueue_script('ajax_upcoming_event_script', get_theme_file_uri('/assets/js/ajax_get_upcoming_event.js'), array('jquery'), NULL, true);
+
+    wp_localize_script('ajax_upcoming_event_script', 'ajaxpagination', array(
+        'ajaxurl' => admin_url('admin-ajax.php')
+    ));
+
 	wp_enqueue_script('ajax_past_event_script', get_theme_file_uri('/assets/js/ajax_get_past_events.js'), array('jquery'), NULL, true);
+
 	wp_localize_script('ajax_past_event_script', 'ajaxpagination', array(
 		'ajaxurl' => admin_url('admin-ajax.php')
 	));

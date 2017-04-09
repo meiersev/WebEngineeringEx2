@@ -643,6 +643,7 @@ get_template_part( 'nav' );
             'meta_compare'   => '>'
     );
     $loop = new WP_Query($args);
+    $num = 0;
 
     while ($loop->have_posts()):
         $loop->the_post();
@@ -663,7 +664,7 @@ get_template_part( 'nav' );
         ?>
             <div class="container-element <?php $num ?>">
             <span><span style= "background-image: url(<?php the_post_thumbnail_url() ?>)"></span></span>
-                <a href="">
+            <a class="<?php echo $num ?>" href="">
                     <h3><?php the_title() ?></h3>
                     <h2><?php
                         if($start_time == $end_time){
@@ -674,10 +675,11 @@ get_template_part( 'nav' );
                         }
                     ?></h2>
                 </a>
-                <p><?php echo $description?><a href="">[READ MORE]</a></p>
+                <p><?php echo $description?><a class="<?php echo $num ?>" href="">[READ MORE]</a></p>
             </div>
 
         <?php
+        $num = $num + 1;
     endwhile;
 ?>
         </div>
