@@ -1,5 +1,6 @@
 (function($) {
     jQuery('.container-element a').click( function(event){ 
+        console.log("test");
         event.preventDefault();
         var offset = $(this).attr("class");
         $.ajax({
@@ -18,17 +19,14 @@
 
                 stateobj = {upcoming: $("#upcoming_event_id").html() };
                 window.history.pushState(stateobj, "", "#upcoming");
-
-
             }
         });
     });
 
     window.onpopstate = function(event){
-        var stateobj = {upcoming: $("#upcoming_event_id").html() };
-        window.history.pushState(stateobj, "", "#upcoming");
-
-        $("#upcoming_event_id").find('.container-element').remove();
-        $("#upcoming_event_id").append(event.state.upcoming);
+        if(event.state.upcoming != null){
+            $("#upcoming_event_id").find('.container-element').remove();
+            $("#upcoming_event_id").append(event.state.upcoming);
+        }
     };
 })(jQuery);
