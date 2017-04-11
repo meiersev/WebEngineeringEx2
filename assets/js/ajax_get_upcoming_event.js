@@ -1,5 +1,5 @@
 (function($) {
-    jQuery('.container-element a').click( function(event){ 
+    $(document).on('click', '.container-element a', function(event){
         console.log("test");
         event.preventDefault();
         var offset = $(this).attr("class");
