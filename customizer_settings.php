@@ -146,14 +146,19 @@ function website_title_customize_register($wp_customize){
         'transport' => 'postMessage',
     ));
 
-    $wp_customize->add_setting('background-color',array(
+    $wp_customize->add_setting('background_color',array(
         'default' => '#443333',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_setting('description_text', array(
+        'default' => 'This is a text',
         'transport' => 'postMessage',
     ));
 
     $wp_customize->add_control(new WP_Customize_Color_Control(
         $wp_customize,
-        'background-color',
+        'background_color',
         array(
             'label'     => __('background-color', fancyrestaurant),
             'section'   => 'header_section',
@@ -176,6 +181,16 @@ function website_title_customize_register($wp_customize){
             'label' => __('What is your title name', 'fancyrestaurant'),
             'section' => 'header_section',
             'settings'=> 'header_title',
+        )
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        'description_text',
+        array(
+            'label' => __('What should the description be like', 'fancyrestaurant'),
+            'section' => 'header_section',
+            'settings'=> 'description_text',
         )
     ));
 }
