@@ -86,6 +86,22 @@ get_template_part( 'nav' );
             <div class="menu-cell">
 			<!-- Appetizers -->
                 <div id="appetizers_id" class="menu-float-wrapper">
+				<?php
+					$args = array(
+					  'post_type' => 'dish',
+					  'meta_query' => array(
+							array(
+								'key'     => 'dish_category',
+								'value'   => 'starter'
+							),
+						),
+					);
+					$page_query = new WP_Query( $args );
+					while ( $page_query->have_posts() ) : $page_query->the_post();
+						get_template_part( 'dish' );
+					endwhile;
+				?>
+				<!--
                     <div class="menu-float">
                         <a href="#bruschette_with_tomatoes" >
                             <img src=<?php echo get_theme_file_uri('assets/images/pic01.jpg') ?> alt="" />
@@ -210,12 +226,27 @@ get_template_part( 'nav' );
                                 We will not accept any liability if they are too spicy.
                             </p>
                         </article>
-                    </div>
+                    </div>-->
                 </div>
 
 				<!-- Fresh Pasta -->
 				<div id="fresh_pasta_id" class="menu-float-wrapper">
-                    <div class="menu-float">
+				<?php
+					$args = array(
+					  'post_type' => 'dish',
+					  'meta_query' => array(
+							array(
+								'key'     => 'dish_category',
+								'value'   => 'pasta'
+							),
+						),
+					);
+					$page_query = new WP_Query( $args );
+					while ( $page_query->have_posts() ) : $page_query->the_post();
+						get_template_part( 'dish' );
+					endwhile;
+				?>
+                <!--    <div class="menu-float">
                         <a href="#spaghetti" >
                             <img src="wp-content/themes/fancyRestaurant/assets/images/spaghetti.jpg" alt="" />
                             <div class="menu-title">
@@ -339,12 +370,27 @@ get_template_part( 'nav' );
                                 The almighty flying spaghetti monster is watching you.
                             </p>
                         </article>
-                    </div>
+                    </div>-->
                 </div>
 
 				<!-- Meat - Fish -->
 				<div id="meat_fish_id" class="menu-float-wrapper">
-                    <div class="menu-float">
+				<?php
+					$args = array(
+					  'post_type' => 'dish',
+					  'meta_query' => array(
+							array(
+								'key'     => 'dish_category',
+								'value'   => 'meat'
+							),
+						),
+					);
+					$page_query = new WP_Query( $args );
+					while ( $page_query->have_posts() ) : $page_query->the_post();
+						get_template_part( 'dish' );
+					endwhile;
+				?>
+                <!--    <div class="menu-float">
                         <a href="#haxen" >
                             <img src="wp-content/themes/fancyRestaurant/assets/images/haxen.jpg" alt="" />
                             <div class="menu-title">
@@ -360,7 +406,7 @@ get_template_part( 'nav' );
                             </header>
                             <img src="wp-content/themes/fancyRestaurant/assets/images/haxen.jpg">
                             <p>
-                                Although they are more famously served in Bayern, but whatever, we also like them.
+                                Although they are more famously served in Bayern, whatever, we also like them.
                             </p>
                         </article>
                     </div>
@@ -468,12 +514,28 @@ get_template_part( 'nav' );
                                 A nice peace of beef with a bacon slice, tomatoes and lattice is found inside of home-made bread.
                             </p>
                         </article>
-                    </div>
+                    </div>-->
                 </div>
 
 
 				<!-- Dessert -->
 				<div id="dessert_id" class="menu-float-wrapper">
+				<?php
+					$args = array(
+					  'post_type' => 'dish',
+					  'meta_query' => array(
+							array(
+								'key'     => 'dish_category',
+								'value'   => 'dessert'
+							),
+						),
+					);
+					$page_query = new WP_Query( $args );
+					while ( $page_query->have_posts() ) : $page_query->the_post();
+						get_template_part( 'dish' );
+					endwhile;
+				?>
+				<!--
                     <div class="menu-float">
                         <a href="#banana_cake" >
                             <img src="wp-content/themes/fancyRestaurant/assets/images/banana_cakes.jpg" alt="" />
@@ -598,7 +660,7 @@ get_template_part( 'nav' );
                                 We serve different desserts fitting the season, don't hesitate to ask our chef about the weekly changes and be surprised by new flavors each time you visit us.
                             </p>
                         </article>
-                    </div>
+                    </div>-->
                 </div>
 
 

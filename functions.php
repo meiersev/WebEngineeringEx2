@@ -160,6 +160,148 @@ if(!function_exists('create_event_post_type')):
 	add_filter('request', 'sort_date');
 endif;
 
+// Custom post type: dish
+
+function create_post_type_dish() {
+  register_post_type( 'dish',
+    array(
+      'labels' => array(
+        'name' => __( 'Dishes' ),
+        'singular_name' => __( 'Dish' )
+      ),
+      'public' => true,
+      'has_archive' => false,
+	  'supports' => array(
+	//			'title',
+	//			'editor',
+	//			'custom-fields',
+				'thumbnail'
+			),
+	  'menu_position' => 5,
+	  'register_meta_box_cb' => 'dish_metabox'
+    )
+  );
+}
+add_action( 'init', 'create_post_type_dish' );
+function dish_metabox(){
+	//add_meta_box( string $id, string $title, callable $callback, string|array|WP_Screen $screen = null, string $context = 'advanced', string $priority = 'default', array $callback_args = null )
+		add_meta_box('dish','Event Data','dish_metabox_form','dish','normal');
+	}
+
+	function dish_metabox_form(){
+		global $post;
+		$custom = get_post_custom($post->ID);
+		$category_selected = $custom['dish_category'][0];
+		$title = $custom['my_post_title'][0];
+		$description = $custom['description'][0];
+
+		$category[0] = ($category_selected == 'starter') ? 'selected' : '';
+		$category[1] = ($category_selected == 'pasta') ? 'selected' : '';
+		$category[2] = ($category_selected == 'meat') ? 'selected' : '';
+		$category[3] = ($category_selected == 'dessert') ? 'selected' : '';
+		?>
+		<div>
+			<p><label>Course Name<br><input type="text" name="my_post_title" size="50"
+				value="<?php echo $title;?>"></label>
+			</p>
+			<p> <label>Course Description<br><textarea rows="6" cols="60" name="description"
+				><?php echo $description?></textarea></label>
+			</p>
+			<p><label>Category <br> <select name="category">
+				<option value="starter" <?php echo $category[0];?>>Appetizers</option>
+				<option value="pasta" <?php echo $category[1];?>>Fresh Pasta</option>
+				<option value="meat" <?php echo $category[2];?>>Meat - Fish</option>
+				<option value="dessert" <?php echo $category[3];?>>Dessert</option>
+				</select></label>
+			</p>
+		</div>
+	<?php
+	}
+function dish_post_save_meta($post_id, $post){
+	
+		// is the user allowed to edit the post or page?
+		if(!current_user_can('edit_post', $post->ID )){
+			return $post->ID;
+		}
+		$event_post_meta['dish_category'] = $_POST['category'];
+		$event_post_meta['my_post_title'] = $_POST['my_post_title'];
+		$event_post_meta['description'] = $_POST['description'];
+		//$post->post_title = $_POST['post_title'];
+		// add values as custom fields
+		foreach($event_post_meta as $key => $value){
+			if(get_post_meta($post->ID, $key, false)){
+				// if the custom field already has a value
+				update_post_meta($post->ID, $key, $value);
+			}else{
+				// if the custom field doesn't have a value
+				add_post_meta($post->ID, $key, $value);
+			}
+			/*if(!$value){
+				// delete if blank
+				delete_post_meta($post->ID, $key);
+			}*/
+		}
+		// Remove the save_post action for the call to wp_update_post, to avoid
+		// looping on it.
+		remove_action('save_post', 'dish_post_save_meta', 10, 2);
+		remove_action('edit_post', 'dish_post_save_meta', 10,2);
+		//wp_die($post_id);
+		$result = wp_update_post(array(
+			'ID'         => $post_id,
+			'post_title' => 'test34'//get_post_meta( $post_id, 'my_post_title', true )
+		));
+		/*wp_update_post($post);*/
+		if( is_wp_error( $result ) ) {
+			wp_die($result->get_error_message());
+		}
+		//wp_insert_post($post, true);
+		add_action('save_post','dish_post_save_meta',10,2);
+		add_action('edit_post', 'dish_post_save_meta', 10,2);
+		
+  }
+	add_action('save_post','dish_post_save_meta',10,2);
+	add_action('edit_post', 'dish_post_save_meta', 10,2);
+// Hook right before inserting into the DB
+	add_filter( 'wp_insert_post_data' , 'modify_post_title' , '99', 2 );
+	function modify_post_title( $data , $postarr )
+	{
+		//wp_die(print_r($data) . '\n\n\n' . print_r($postarr));
+		//wp_die($postarr['my_post_title']);
+	  if($data['post_type'] == 'dish' && $postarr['my_post_title']) {
+		$data['post_title'] =  $postarr['my_post_title'];
+	  }
+	  return $data;
+	}
+
+// Admin area for dish
+// Hooking on name colomn, how nice indeed
+add_action(
+    'admin_head-edit.php',
+    'display_custom_title_from_meta_data'
+);
+function display_custom_title_from_meta_data() {
+    add_filter(
+        'the_title',
+        'my_title',
+        100,
+        2
+    );
+}
+function my_title( $title, $id ) {
+    return get_post_meta($id, 'my_post_title', true);;
+}
+	
+	
+// Accessing the values from template requires some functions
+function the_dish_content() {
+	$content = get_post_meta( get_the_ID(), 'description', true );
+	echo $content;
+}
+function the_dish_title() {
+	$title = get_post_meta( get_the_ID(), 'my_post_title', true );
+	echo $title;
+}
+	
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
