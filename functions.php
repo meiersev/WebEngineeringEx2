@@ -274,7 +274,7 @@ function dish_post_save_meta($post_id, $post){
 	}
 
 // Admin area for dish
-// Hooking on name colomn, how nice indeed
+// Hooking on name column, how nice indeed
 add_action(
     'admin_head-edit.php',
     'display_custom_title_from_meta_data'
@@ -288,7 +288,8 @@ function display_custom_title_from_meta_data() {
     );
 }
 function my_title( $title, $id ) {
-    return get_post_meta($id, 'my_post_title', true);;
+	$custom_title = get_post_meta($id, 'my_post_title', true);
+    return $custom_title ? $custom_title : $title;
 }
 	
 	
