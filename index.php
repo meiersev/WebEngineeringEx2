@@ -21,14 +21,13 @@ get_template_part( 'nav' );
  ?>
 
 
-<div id="description" style="display:none"> 
-<?php echo get_theme_mod('description_text', 'This is a description');?>
-</div>
-
 <a class="anchor" id="home"></a>
 <header id="home_id" >
     <h1> <?php echo get_theme_mod('header_title', 'LaPlace - Zurich');?> </h1>
     <a href="#book" class="lp-button hover-dark-gray" >Book a Table</a>
+	<p id="description"> 
+		<?php echo get_theme_mod('description_text', 'This is a description');?>
+	</p>
 </header>
 <!-- First About-->
 
