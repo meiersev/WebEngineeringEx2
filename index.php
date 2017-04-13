@@ -86,584 +86,81 @@ get_template_part( 'nav' );
             <div class="menu-cell">
 			<!-- Appetizers -->
                 <div id="appetizers_id" class="menu-float-wrapper">
-				<?php
-					$args = array(
-					  'post_type' => 'dish',
-					  'meta_query' => array(
-							array(
-								'key'     => 'dish_category',
-								'value'   => 'starter'
+					<?php
+						$args = array(
+						  'post_type' => 'dish',
+						  'meta_query' => array(
+								array(
+									'key'     => 'dish_category',
+									'value'   => 'starter'
+								),
 							),
-						),
-					);
-					$page_query = new WP_Query( $args );
-					while ( $page_query->have_posts() ) : $page_query->the_post();
-						get_template_part( 'dish' );
-					endwhile;
-				?>
-				<!--
-                    <div class="menu-float">
-                        <a href="#bruschette_with_tomatoes" >
-                            <img src=<?php echo get_theme_file_uri('assets/images/pic01.jpg') ?> alt="" />
-                            <div class="menu-title">
-                                <span>Bruschette with Tomatoes</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="bruschette_with_tomatoes" class="popup">
-                        <article>
-                            <header>
-                                <h3>Bruschette with Tomatoes</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic01.jpg">
-                            <p>
-                                Our bruschette with tomatoes are fabulous! We have been awarded internationally for <i>#1 Best Bruschette with Tomatoes outside of Italy served at lunch time</i> every year for the last two decades.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#green_rolls" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic02.jpg" alt="" />
-                            <div class="menu-title" >
-                                <span> Green Rolls </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="green_rolls" class="popup">
-                        <article>
-                            <header>
-                                <h3>Green Rolls</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic02.jpg">
-                            <p>
-                                They are green. They roll. What else would you ask for?
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#eggplants" >
-                            <img  src="wp-content/themes/fancyRestaurant/assets/images/eggplants.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Eggplants  </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="eggplants" class="popup">
-                        <article>
-                            <header>
-                                <h3>Eggplants</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/eggplants.jpg">
-                            <p>
-                                Our chef has developed his unique own way to deal with dreadful eggplants, such that they are almost completely harmless for human beings.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#bruschette" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic04.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Bruschette</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="bruschette" class="popup">
-                        <article>
-                            <header>
-                                <h3>Bruschette</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic04.jpg">
-                            <p>
-                                The classic bruchette of our magnificent cuisine is almost as delicate as the bruchette with tomatoes!
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#bell_pepper" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic03.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Bell pepper</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="bell_pepper" class="popup">
-                        <article>
-                            <header>
-                                <h3>Bell pepper</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic03.jpg">
-                            <p>
-                                Some people really like bell pepper. Other's have never tasted it.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#spicy_beans" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic06.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Spicy Beans</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="spicy_beans" class="popup">
-                        <article>
-                            <header>
-                                <h3>Spicy Beans</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic06.jpg">
-                            <p>
-                                We will not accept any liability if they are too spicy.
-                            </p>
-                        </article>
-                    </div>-->
+						);
+						$page_query = new WP_Query( $args );
+						while ( $page_query->have_posts() ) : $page_query->the_post();
+							get_template_part( 'dish' );
+						endwhile;
+					?>
                 </div>
 
 				<!-- Fresh Pasta -->
 				<div id="fresh_pasta_id" class="menu-float-wrapper">
-				<?php
-					$args = array(
-					  'post_type' => 'dish',
-					  'meta_query' => array(
-							array(
-								'key'     => 'dish_category',
-								'value'   => 'pasta'
+					<?php
+						$args = array(
+						  'post_type' => 'dish',
+						  'meta_query' => array(
+								array(
+									'key'     => 'dish_category',
+									'value'   => 'pasta'
+								),
 							),
-						),
-					);
-					$page_query = new WP_Query( $args );
-					while ( $page_query->have_posts() ) : $page_query->the_post();
-						get_template_part( 'dish' );
-					endwhile;
-				?>
-                <!--    <div class="menu-float">
-                        <a href="#spaghetti" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/spaghetti.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Spaghetti Carbonara</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="spaghetti" class="popup">
-                        <article>
-                            <header>
-                                <h3>Spaghetti Carbonara</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/spaghetti.jpg">
-                            <p>
-                                We usually eat them with a fork and a spoon, but if you like we can also cut it for you so cou can eat with a spoon only.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#whole_grain" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/whole_grain.jpg" alt="" />
-                            <div class="menu-title" >
-                                <span> Whole grain pasta </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="whole_grain" class="popup">
-                        <article>
-                            <header>
-                                <h3>Whole grain pasta</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/whole_grain.jpg">
-                            <p>
-                                You will probably not taste the difference, but at least you can tell yourself you are eating extra-healthy pasta.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#tortellini" >
-                            <img  src="wp-content/themes/fancyRestaurant/assets/images/tortellini.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Tortellini  </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="tortellini" class="popup">
-                        <article>
-                            <header>
-                                <h3>Tortellini</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/tortellini.jpg">
-                            <p>
-                                You should try to make them by yourself, it is really tedious!
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#arrabiata" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/arrabiata.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Pasta Arrabiata</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="arrabiata" class="popup">
-                        <article>
-                            <header>
-                                <h3>Pasta Arrabiata</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/arrabiata.jpg">
-                            <p>
-                                It can somteimes be a bit spicy, but it mostly depends on the chefs mood.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#pasta" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pasta.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Normal pasta</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="pasta" class="popup">
-                        <article>
-                            <header>
-                                <h3>Normal pasta</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pasta.jpg">
-                            <p>
-                                Sometimes it is also important to mention that we do actually serve normal pasta, too.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#fsm" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/fsm.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Flying Spaghetti Monster</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="fsm" class="popup">
-                        <article>
-                            <header>
-                                <h3>Flying Spaghetti Monster</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/fsm.jpg">
-                            <p>
-                                The almighty flying spaghetti monster is watching you.
-                            </p>
-                        </article>
-                    </div>-->
+						);
+						$page_query = new WP_Query( $args );
+						while ( $page_query->have_posts() ) : $page_query->the_post();
+							get_template_part( 'dish' );
+						endwhile;
+					?>        
+                        
                 </div>
 
 				<!-- Meat - Fish -->
 				<div id="meat_fish_id" class="menu-float-wrapper">
-				<?php
-					$args = array(
-					  'post_type' => 'dish',
-					  'meta_query' => array(
-							array(
-								'key'     => 'dish_category',
-								'value'   => 'meat'
+					<?php
+						$args = array(
+						  'post_type' => 'dish',
+						  'meta_query' => array(
+								array(
+									'key'     => 'dish_category',
+									'value'   => 'meat'
+								),
 							),
-						),
-					);
-					$page_query = new WP_Query( $args );
-					while ( $page_query->have_posts() ) : $page_query->the_post();
-						get_template_part( 'dish' );
-					endwhile;
-				?>
-                <!--    <div class="menu-float">
-                        <a href="#haxen" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/haxen.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Haxen</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="haxen" class="popup">
-                        <article>
-                            <header>
-                                <h3>Haxen</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/haxen.jpg">
-                            <p>
-                                Although they are more famously served in Bayern, whatever, we also like them.
-                            </p>
-                        </article>
-                    </div>
-
-                     <div class="menu-float">
-                        <a href="#meatballs" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic05.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Meatballs</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="meatballs" class="popup">
-                        <article>
-                            <header>
-                                <h3>Meatballs</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/pic05.jpg">
-                            <p>
-                                Also available for vegatarians as almost-meatballs with tofu instead of animal's mortal remains.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#fish" >
-                            <img  src="wp-content/themes/fancyRestaurant/assets/images/fish.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Fish & Chips  </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="fish" class="popup">
-                        <article>
-                            <header>
-                                <h3>Fish & Chips</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/fish.jpg">
-                            <p>
-                                A perfect match for our youngest guests.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#prawn" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/prawn.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Prawns</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="prawn" class="popup">
-                        <article>
-                            <header>
-                                <h3>Prawns</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/prawn.jpg">
-                            <p>
-                                It might be hard to believe, but they are actually eatable.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#steak" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/steak.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Steak on a hot stone plate</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="steak" class="popup">
-                        <article>
-                            <header>
-                                <h3>Steak on a hot stone plate</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/steak.jpg">
-                            <p>
-                                The size of the meat loaf goes down as the reputation of the restaurant and the prize go up. But the stone is always large and heavy.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#burger" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/burger.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Burger</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="burger" class="popup">
-                        <article>
-                            <header>
-                                <h3>Burger</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/burger.jpg">
-                            <p>
-                                A nice peace of beef with a bacon slice, tomatoes and lattice is found inside of home-made bread.
-                            </p>
-                        </article>
-                    </div>-->
+						);
+						$page_query = new WP_Query( $args );
+						while ( $page_query->have_posts() ) : $page_query->the_post();
+							get_template_part( 'dish' );
+						endwhile;
+					?>
                 </div>
-
 
 				<!-- Dessert -->
 				<div id="dessert_id" class="menu-float-wrapper">
-				<?php
-					$args = array(
-					  'post_type' => 'dish',
-					  'meta_query' => array(
-							array(
-								'key'     => 'dish_category',
-								'value'   => 'dessert'
+					<?php
+						$args = array(
+						  'post_type' => 'dish',
+						  'meta_query' => array(
+								array(
+									'key'     => 'dish_category',
+									'value'   => 'dessert'
+								),
 							),
-						),
-					);
-					$page_query = new WP_Query( $args );
-					while ( $page_query->have_posts() ) : $page_query->the_post();
-						get_template_part( 'dish' );
-					endwhile;
-				?>
-				<!--
-                    <div class="menu-float">
-                        <a href="#banana_cake" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/banana_cakes.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Banana cakes</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="banana_cake" class="popup">
-                        <article>
-                            <header>
-                                <h3>Banana cakes</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/banana_cakes.jpg">
-                            <p>
-                                Because bananas are awesome!
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#raspberry_pie" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/raspberry_pie.jpg" alt="" />
-                            <div class="menu-title" >
-                                <span> Raspberry pie </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="raspberry_pie" class="popup">
-                        <article>
-                            <header>
-                                <h3>Raspberry pie</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/raspberry_pie.jpg">
-                            <p>
-                                This is easily confused with a british single-board computer.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#apple_pie" >
-                            <img  src="wp-content/themes/fancyRestaurant/assets/images/apple_pie.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Apple pie  </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="apple_pie" class="popup">
-                        <article>
-                            <header>
-                                <h3>Apple pie</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/apple_pie.jpg">
-                            <p>
-                                The apple slices are layerd in spiral shapes and are enormously tasty.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#icecream" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/icecream.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Ice Cream</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="icecream" class="popup">
-                        <article>
-                            <header>
-                                <h3>Ice cream</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/icecream.jpg">
-                            <p>
-                                Be amazed by the incredible variety of different ice cream flavors and be even more astonished by the factorial high number of possible combinations! (The order matters for aesthetic reasons.)
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#hot_berry" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/hot_berry.jpg" alt="" />
-                            <div class="menu-title">
-                                <span>Hot berries</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="hot_berry" class="popup">
-                        <article>
-                            <header>
-                                <h3>Hot berries</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/hot_berry.jpg">
-                            <p>
-                                A special mix of frozen ice cream and steaming, hot berries in a glass cup. Hurry quickly while eating this dessert!
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="menu-float">
-                        <a href="#seasonal" >
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/seasonal.jpg" alt="" />
-                            <div class="menu-title">
-                                <span> Seasonal desserts</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="seasonal" class="popup">
-                        <article>
-                            <header>
-                                <h3>Seasonal desserts</h3>
-                                <a class="close-button" href="#close">x</a>
-                            </header>
-                            <img src="wp-content/themes/fancyRestaurant/assets/images/seasonal.jpg">
-                            <p>
-                                We serve different desserts fitting the season, don't hesitate to ask our chef about the weekly changes and be surprised by new flavors each time you visit us.
-                            </p>
-                        </article>
-                    </div>-->
+						);
+						$page_query = new WP_Query( $args );
+						while ( $page_query->have_posts() ) : $page_query->the_post();
+							get_template_part( 'dish' );
+						endwhile;
+					?>
                 </div>
-
-
+				
             </div>
         </div>
     </div>
