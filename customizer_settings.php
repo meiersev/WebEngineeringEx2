@@ -200,7 +200,7 @@ function fancyrestaurant_color_css(){
 ?>
     <style type="text/css">
         .lp-brown{
-            background-color: <?php echo get_theme_mod('background-color')?>;
+            background-color: #<?php echo get_theme_mod('background_color')?>;
     }
     </style>
 <?php
