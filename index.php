@@ -52,6 +52,7 @@ get_template_part( 'nav' );
 	while ( $page_query->have_posts() ) : $page_query->the_post();
 		get_template_part( 'page_content' );
 	endwhile;
+		/*echo date('Y-m-d\TH:i');*/
 ?>
 
 <!-- Start Menu -->
@@ -200,8 +201,8 @@ get_template_part( 'nav' );
             'orderby'        => 'meta_value',
             'order'          => 'ASC',
             'meta_key'       => 'event_end',
-            'meta_value'     => date('Y-m-dTH:i'),
-            'meta_compare'   => '>'
+            'meta_value'     => date('Y-m-d\TH:i'),
+            'meta_compare'   => '>='
     );
     $loop = new WP_Query($args);
     $num = 0;
@@ -250,7 +251,7 @@ get_template_part( 'nav' );
           'posts_per_page' => 4,
           'orderby'        => 'meta_value',
           'meta_key'       => 'event_end',
-          'meta_value'     => date('Y-m-dTH:i'),
+          'meta_value'     => date('Y-m-d\TH:i'),
           'meta_compare'   => '<'
         );
         $eventPosts = new WP_Query($queryArgs);
